@@ -43,6 +43,20 @@
 
 <body>
     <div class="hero_area">
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <script>
+            var alertElement = document.querySelector('.alert');
+            var closeButton = alertElement.querySelector('.btn-close');
+    
+            closeButton.addEventListener('click', function() {
+                alertElement.classList.add('d-none');
+            });
+        </script>
+        @endif
         <!-- header section strats -->
         @include('partials.header')
         <!-- end header section -->
@@ -538,7 +552,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-xl-2 px-0">
-                    <a href="Produit.html#Telephone" class="box" target="_blank">
+                    <a href="{{ route('telephone') }}" class="box" target="_blank">
                         <div class="img-box">
                             <img src="images/c1.png" alt="">
                         </div>
@@ -550,7 +564,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4 col-xl-2 px-0">
-                    <a href="Produit.html#Electromenager" class="box" target="_blank">
+                    <a href="{{ route('electromenager') }}" class="box" target="_blank">
                         <div class="img-box">
                             <img src="images/c2.png" alt="">
                         </div>
@@ -562,7 +576,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4 col-xl-2 px-0">
-                    <a href="Produit.html#Informatique" class="box" target="_blank">
+                    <a href="{{ route('informatique') }}" class="box" target="_blank">
                         <div class="img-box">
                             <img src="images/c3.png" alt="">
                         </div>
@@ -574,7 +588,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4 col-xl-2 px-0">
-                    <a href="Produit.html#Mode" class="box" target="_blank">
+                    <a href="{{ route('mode') }}" class="box" target="_blank">
                         <div class="img-box">
                             <img src="images/c4.png" alt="">
                         </div>
@@ -586,7 +600,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4 col-xl-2 px-0">
-                    <a href="Produit.html#Electronique" class="box" target="_blank">
+                    <a href="{{ route('electronique') }}" class="box" target="_blank">
                         <div class="img-box">
                             <img src="images/c5.png" alt="">
                         </div>
@@ -598,7 +612,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4 col-xl-2 px-0">
-                    <a href="Produit.html#Cosmetique" class="box" target="_blank">
+                    <a href="{{ route('cosmetique') }}" class="box" target="_blank">
                         <div class="img-box">
                             <img src="images/c6.png" alt="">
                         </div>

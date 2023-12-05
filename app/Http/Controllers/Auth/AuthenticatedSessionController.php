@@ -30,8 +30,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // return redirect()->intended(RouteServiceProvider::HOME);
-        return redirect('/Accueil');
-    }
+        return redirect('/Accueil')->with('success', 'Connexion réussie ! Bienvenue.');
+        }
 
     /**
      * Destroy an authenticated session.
@@ -42,8 +42,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
-
+        $request->session()->flash('success', 'Vous avez été déconnecté avec succès.');
         return redirect('/');
     }
 }

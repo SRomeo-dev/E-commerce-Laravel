@@ -1,5 +1,18 @@
-
+@if(session('success'))
+    <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+        <span class="block sm:inline">{{ session('success') }}</span>
+        <button id="closeBtn" type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            Fermer
+        </button>
+    </div>
+    <script>
+        document.getElementById('closeBtn').addEventListener('click', function() {
+            document.getElementById('alert').style.display = 'none';
+        });
+    </script>
+@endif
 <x-guest-layout>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <form method="POST" action="{{ route('login') }}">

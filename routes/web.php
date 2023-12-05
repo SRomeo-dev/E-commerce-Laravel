@@ -51,4 +51,29 @@ Route::middleware('auth')->group(function () {
     Route::get('/Panier', function () {
         return view('Panier');
     })->name('panier');
+
+    
+    Route::get('/Produits#Telephone', function(){
+        return view('Produits#Telephone');
+    })->name('telephone');
+    
+    Route::get('/Produits#Electromenager', function(){
+        return view('Produits#Electromenager');
+    })->name('electromenager');
+    
+    Route::get('/Produits#Informatique', function(){
+        return view('Produits#Informatique');
+    })->name('informatique');
+    
+    Route::get('/Produits#Mode', function(){
+        return view('Produits#Mode');
+    })->name('mode');
+    
+    Route::get('/Produits#Cosmetique', function(){
+        return view('Produits#Cosmetique');
+    })->name('cosmetique');
+    
+    Route::get('/Produits#Electronique', function(){
+        return view('Produits#Electronique');
+    })->name('electronique');
 });

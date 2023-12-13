@@ -1,8 +1,11 @@
 @if(session('success'))
     <div id="alert" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
         <span class="block sm:inline">{{ session('success') }}</span>
-        <button id="closeBtn" type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3">
-            Fermer
+        <button id="closeBtn" type="button" class="absolute top-0 bottom-0 right-0 px-4 py-3 flex items-center">
+            <!-- Utilisation de l'icône de fermeture "X" de Heroicons -->
+            <svg class="h-5 w-5 text-green-700 fill-current" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 5.293a1 1 0 011.414 0L10 8.586l3.293-3.293a1 1 0 111.414 1.414L11.414 10l3.293 3.293a1 1 0 11-1.414 1.414L10 11.414l-3.293 3.293a1 1 0 01-1.414-1.414L8.586 10 5.293 6.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
         </button>
     </div>
     <script>

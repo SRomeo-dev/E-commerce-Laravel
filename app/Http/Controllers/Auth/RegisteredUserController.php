@@ -48,6 +48,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/Accueil');
+        $request->session();
+        
+        return redirect('/Accueil')->with('success', 'Inscription réusi!');
     }
 }

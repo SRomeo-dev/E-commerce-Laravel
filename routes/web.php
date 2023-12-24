@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\PanierController;
+use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RouteController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,22 +41,25 @@ require __DIR__.'/auth.php';
 // Mes propre routes
 
 Route::middleware('auth')->group(function () {
-    Route::get('/Accueil', function () {
-        return view('Accueil');
-    })->name('accueil');
+    Route::get('/Accueil', [AccueilController::class, 'accueil'])->name('accueil');
+    Route::get('/Produits', [ProduitController::class, 'index'])->name('produits');
+    Route::get('/Panier', [PanierController::class, 'index'])->name('panier');
 
-    Route::get('/Produits', function () {
-        return view('Produits');
-    })->name('produits');
+    // Ajouter au panier
+    Route::post('/Panier/ajouter', [PanierController::class, 'store'])->name('panier.add');
 
+    // supprimer du panier
+    Route::delete('/Panier/{rowId}', [PanierController::class, 'destroy'])->name('panier.delete');
+
+    // vider le panier
+    Route::get('/Panier/vider', function(){
+        Cart::destroy();
+    });
+
+            
     Route::get('/Propos', function () {
         return view('Propos');
     })->name('propos');
-
-    Route::get('/Panier', function () {
-        return view('Panier');
-    })->name('panier');
-
     
     Route::get('/Produits#Telephone', function(){
         return view('Produits#Telephone');
@@ -77,3 +85,44 @@ Route::middleware('auth')->group(function () {
         return view('Produits#Electronique');
     })->name('electronique');
 });
+
+
+// Routes Admin
+Route::get('/index', function(){
+    return view('admin.index');
+})->name('admin');
+
+Route::get('/Clients', function(){
+    return view('admin.clients');
+})->name('client');
+
+Route::get('/Admin-produits', function(){
+    return view('admin.produits');
+})->name('produit');
+
+Route::get('/Commandes', function(){
+    return view('admin.commandes');
+})->name('commande');
+
+Route::get('/Profil', function(){
+    return view('admin.profil');
+})->name('profil');
+
+
+// Produits
+Route::get('/Produits/Ajouter', function(){
+    return view('admin.produit.add');
+})->name('produit-add');
+
+Route::get('/Produits/Modifier', function(){
+    return view('admin.produit.edit');
+})->name('produit-edit');
+
+// client
+Route::get('/Clients/Ajouter', function(){
+    return view('admin.client.add');
+})->name('client-add');
+
+Route::get('/Clients/Modifier', function(){
+    return view('admin.client.edit');
+})->name('client-edit');

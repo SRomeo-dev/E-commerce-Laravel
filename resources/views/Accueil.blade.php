@@ -546,7 +546,6 @@
             </div>
         </div>
     </section>
-
     <!-- category section -->
     <section class="category_section">
         <div class="container-fluid">

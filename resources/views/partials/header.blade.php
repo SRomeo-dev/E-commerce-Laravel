@@ -26,9 +26,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('panier') }}">
-                            <i class="fa-solid fa-cart-plus"></i>
                             <span>
-                                Panier
+                                Panier 
+                                <span class="badge badge-pill badge-danger">{{ Cart::count() }}</span>
                             </span>
                         </a>
                     </li>

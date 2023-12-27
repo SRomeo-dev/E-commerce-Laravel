@@ -84,11 +84,11 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <form>
+                                <form action="{{ route('recherche') }}">
                                     <div class="form-row ">
                                         <div class="form-group col-lg-4">
                                             <input type="text" class="form-control" id="inputPatientName"
-                                                placeholder="Rechercher......">
+                                                placeholder="Rechercher......" name="q">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <select name="" class="form-control wide" id="inputDepartmentName">

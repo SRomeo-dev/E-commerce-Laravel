@@ -62,6 +62,7 @@
             </div>
 
             <table class="table">
+                
                 <thead>
                     <tr>
                         <th>#</th>
@@ -73,24 +74,30 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($produits as $produit)
                     <tr>
-                        <td>1</td>
-                        <td>Infinix Smart 7</td>
-                        <td>Mr 17</td>
-                        <td>65,000 FCFA</td>
-                        <td>64 Go</td>
+                        <td>{{ $produit->id }}</td>
+                        <td>{{ $produit->image }}</td>
+                        <td>{{ $produit->nom }}</td>
+                        <td>{{ $produit->prix }} FCFA</td>
+                        <td>{{ $produit->description }}</td>
                         <td>
                             <a href="{{ route('produit-edit') }}" class="btn btn-warning shadow">
                                 <i class="bi bi-pencil"></i> Modifier
                             </a>
-                            <a href="#" class="btn btn-danger shadow">
+                            <button type="submit" form="deleteForm" class="btn btn-danger shadow">
                                 <i class="bi bi-trash"></i> Supprimer
-                            </a>
-                        </td>
+                            </button>
+                            <form id="deleteForm" action="{{ route('supprimer.produit', ['produit' => $produit]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </td>                        
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
-                    </div>
+        </div>
 
     </main><!-- End #main -->
 
@@ -118,5 +125,4 @@
     <script src="assets/js/main.js"></script>
 
 </body>
-
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Admin;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -25,14 +26,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-
-        $request->session()->regenerate();
-
-        // return redirect()->intended(RouteServiceProvider::HOME);
-        return redirect('/Accueil')->with('success', 'Connexion réussie ! Bienvenue.');
+        $request->authenticate(); // Cette ligne est responsable de l'authentification de l'utilisateur
+    
+        $request->session()->regenerate(); // Ceci régénère l'ID de session après l'authentification
+    
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin')->with('success', 'Connexion réussie en tant qu\'administrateur');
         }
-
+    
+        // Redirection vers la page d'accueil après une connexion réussie pour les non-administrateurs
+        return redirect('/Accueil')->with('success', 'Connexion réussie ! Bienvenue.');
+    }
+    
     /**
      * Destroy an authenticated session.
      */

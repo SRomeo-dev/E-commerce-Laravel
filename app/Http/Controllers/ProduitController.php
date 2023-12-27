@@ -12,13 +12,26 @@ class ProduitController extends Controller
      */
     public function index()
     {
-        $produits = Produit::all(); // pour récuperer tout mes produits dans la base de donnée
+        $produits = Produit::all();
         return view('Produits', [
             'produits' => $produits,
         ]);
 
     }
 
+    public function search()
+    {
+        $q = request()->input('q');
+        $produits = Produit::where('nom', 'like', "%$q%")
+                          ->orWhere('description', 'like', "%$q%")
+                          ->orWhere('category_id', 'like', "%$q%")
+                          ->get();
+    
+        $total = $produits->count(); // Utilisation de la méthode count() pour obtenir le total d'éléments dans la collection
+    
+        return view('partials.recherche')->with('produits', $produits)->with('total', $total);
+    }
+        
     /**
      * Show the form for creating a new resource.
      */

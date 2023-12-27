@@ -62,7 +62,7 @@
         <!-- end header section -->
     </div>
 
-    {{-- <section class="h-100 h-custom">
+    <section class="h-100 h-custom">
         <div class="container h-100 py-5">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
@@ -91,7 +91,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-                                            <p class="mb-0" style="font-weight: 500;">{{ $produit->model->nom }}</p>
+                                            <p class="mb-0" style="font-weight: 500;"><input type="hidden" name="productName[]" value="{{ $produit->model->nom }}">{{ $produit->model->nom }}</p>
                                         </td>
                                         <td class="align-middle">
                                             <div class="d-flex flex-row">
@@ -105,7 +105,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-                                            <p class="mb-0" style="font-weight: 500;">{{ $produit->model->prix }} FCFA</p>
+                                            <p class="mb-0" style="font-weight: 500;"><input type="hidden" name="productName[]" value="{{ $produit->model->prix }}">{{ $produit->model->prix }}CFA</p>
                                         </td>
                                         <td class="align-middle">
                                             <form action="{{ route('panier.delete', $produit->rowId) }}" method="POST">
@@ -130,118 +130,43 @@
                 </div>
                        
                 @if (Cart::count() > 0)
-                    
-              <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
-                <div class="card-body p-4">
-      
-                  <div class="row">
-                    <div class="col-md-6 col-lg-4 col-xl-3 mb-4 mb-md-0">
-                      <form>
-                        <div class="d-flex flex-row pb-3">
-                          <div class="d-flex align-items-center pe-2">
-                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1v"
-                              value="" aria-label="..." checked />
-                          </div>
-                          <div class="rounded border w-100 p-3">
-                            <p class="d-flex align-items-center mb-0">
-                              <i class="fab fa-cc-mastercard fa-2x text-dark pe-2"></i>
-                              Carte de crédit
-                            </p>
-                          </div>
-                        </div>
-                        <div class="d-flex flex-row pb-3">
-                          <div class="d-flex align-items-center pe-2">
-                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2v"
-                              value="" aria-label="..." />
-                          </div>
-                          <div class="rounded border w-100 p-3">
-                            <p class="d-flex align-items-center mb-0">
-                              <i class="fab fa-cc-visa fa-2x fa-lg text-dark pe-2"></i>Carte de debit
-                            </p>
-                          </div>
-                        </div>
-                        <div class="d-flex flex-row">
-                          <div class="d-flex align-items-center pe-2">
-                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel3v"
-                              value="" aria-label="..." />
-                          </div>
-                          <div class="rounded border w-100 p-3">
-                            <p class="d-flex align-items-center mb-0">
-                              <i class="fab fa-cc-paypal fa-2x fa-lg text-dark pe-2"></i>PayPal
-                            </p>
-                          </div>
-                        </div>
-                      </form>
+                <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+                    <div class="card-body p-4">
+                            <div class="row">                
+                                <div class="col-lg-4 col-xl-3">
+                                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                        <p class="mb-2">Montant total</p>
+                                        <p class="mb-2">{{ Cart::subtotal() }} FCFA</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                                        <p class="mb-0">Taxe</p>
+                                        <p class="mb-0">{{ Cart::tax() }} FCFA</p>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                                        <p class="mb-2">Total</p>
+                                        <p class="mb-2">{{ Cart::total() }} FCFA</p>
+                                    </div>
+                                    <form action="{{ route('session') }}" method="POST">
+                                        @csrf <!-- Ajout du jeton CSRF -->
+                                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                            <div class="d-flex justify-content-between">
+                                                <span>Payer</span>
+                                                <span>{{ Cart::total() }} FCFA</span>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 col-xl-6">
-                      <div class="row">
-                        <div class="col-12 col-xl-6">
-                          <div class="form-outline mb-4 mb-xl-5">
-                            <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                              placeholder="John Smith" />
-                            <label class="form-label" for="typeName">Nom de la carte</label>
-                          </div>
-      
-                          <div class="form-outline mb-4 mb-xl-5">
-                            <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YY"
-                              size="7" id="exp" minlength="7" maxlength="7" />
-                            <label class="form-label" for="typeExp">Expiration</label>
-                          </div>
-                        </div>
-                        <div class="col-12 col-xl-6">
-                          <div class="form-outline mb-4 mb-xl-5">
-                            <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
-                              placeholder="1111 2222 3333 4444" minlength="19" maxlength="19" />
-                            <label class="form-label" for="typeText">Numéro de la carte</label>
-                          </div>
-      
-                          <div class="form-outline mb-4 mb-xl-5">
-                            <input type="password" id="typeText" class="form-control form-control-lg"
-                              placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                            <label class="form-label" for="typeText">Cvv</label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3">
-                      <div class="d-flex justify-content-between" style="font-weight: 500;">
-                        <p class="mb-2">Montant total</p>
-                        <p class="mb-2">{{ Cart::subtotal() }} FCFA</p>
-                      </div>
-      
-                      <div class="d-flex justify-content-between" style="font-weight: 500;">
-                        <p class="mb-0">Taxe</p>
-                        <p class="mb-0">{{ Cart::tax() }} FCFA</p>
-                      </div>
-      
-                      <hr class="my-4">
-      
-                      <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
-                        <p class="mb-2">Total </p>
-                        <p class="mb-2">{{ Cart::total() }} FCFA</p>
-                      </div>
-      
-                      <button type="button" class="btn btn-primary btn-block btn-lg">
-                        <div class="d-flex justify-content-between">
-                          <span>Payer</span>
-                          <span>{{ Cart::total() }} FCFA</span>
-                        </div>
-                      </button>
-      
-                    </div>
-                  </div>
-      
                 </div>
-              </div>
-              @endif
-
-      
+                @endif
             </div>
           </div>
         </div>
-    </section> --}}
+    </section>
 
-    @if (Cart::count() > 0)     
+    {{-- @if (Cart::count() > 0)     
     <div class="px-4 px-lg-0">
         <div class="pb-5">
             <div class="container">
@@ -324,7 +249,7 @@
     </div>
     @else
     <h2>Votre panier est vide</h2>
-    @endif 
+    @endif  --}}
       
 
     <!-- jQery -->

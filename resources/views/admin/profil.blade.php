@@ -68,7 +68,7 @@
 
                             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                             <h2>Romeo SAWADOGO</h2>
-                            <h3>Analuste développeur</h3>
+                            <h3>Administrateur 2R-Shop</h3>
                             <div class="social-links mt-2">
                                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -187,7 +187,7 @@
                                             <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="job" type="text" class="form-control" id="Job"
-                                                    value="Analyste développeur">
+                                                    value="Administrateur 2R-Shop">
                                             </div>
                                         </div>
 

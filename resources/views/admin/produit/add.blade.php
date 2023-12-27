@@ -64,6 +64,7 @@
             <div class="container mt-5">
                 <h2>Ajouter un Produit</h2>
                 <form class=" p-4 shadow" style="width: 50%;">
+                    @csrf
                     <!-- Champ d'upload pour l'image -->
                     <div class="mb-3">
                         <label for="productImage" class="form-label">Image du Produit</label>

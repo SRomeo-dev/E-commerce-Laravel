@@ -50,7 +50,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>Romeo SAWADOGO</h6>
-                        <span>Analyste développeur</span>
+                        <span>Administrateur 2R-Shop</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -66,19 +66,20 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-
                         <hr class="dropdown-divider">
                     </li>
-
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Déconnexion</span>
-                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                            <button type="submit" class="dropdown-item d-flex align-items-center">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Déconnexion</span>
+                            </button>
+                        </form>
                     </li>
 
                 </ul><!-- End Profile Dropdown Items -->

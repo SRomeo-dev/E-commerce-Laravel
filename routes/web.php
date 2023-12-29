@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccueilController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProduitController;
@@ -101,43 +102,43 @@ Route::middleware('auth')->group(function () {
 
 // Routes accessibles uniquement à l'administrateur
 Route::middleware(['auth', Admin::class])->group(function () {
-    Route::get('/admin/dasboard', function(){
+    Route::get('/admin/dashboard', function(){
         return view('admin.index');
     })->name('admin');
-
-    Route::get('/admin/clients', function(){
-        return view('admin.clients');
-    })->name('client');
 
     // Produits
     Route::get('/admin/produits', [AdminController::class, 'index'])->name('produit');
 
     Route::get('/admin/produits/supprimer', [AdminController::class, 'destroy'])->name('supprimer.produit');
 
-    Route::get('/admin/produits/Ajouter', function(){
-        return view('admin.produit.add');
-    })->name('produit-add');
+    Route::get('/admin/produits/ajouter', [AdminController::class, 'create'])->name('produit-add');
+    Route::post('/admin/produits/ajouter', [AdminController::class, 'store'])->name('produit-ajouter');
 
-    Route::get('/admin/produits/modifier', function(){
-        return view('admin.produit.edit');
-    })->name('produit-edit');
+    Route::get('/admin/produits/modifier/{id}', [AdminController::class, 'edit'])->name('produit-edit');
+    Route::put('/admin/produits/update/{id}', [AdminController::class, 'update'])->name('produit.update');
 
-
-    Route::get('/admin/Commandes', function(){
-        return view('admin.commandes');
-    })->name('commande');
-
-    Route::get('/admin/Profil', function(){
-        return view('admin.profil');
-    })->name('profil');
+    Route::delete('/admin/produit/delete/{id}', [AdminController::class, 'delete'])->name('client.delete');
 
 
     // client
-    Route::get('/Clients/Ajouter', function(){
-        return view('admin.client.add');
-    })->name('client-add');
+    Route::get('/admin/clients', [AdminUserController::class, 'index'])->name('client');
 
-    Route::get('/Clients/Modifier', function(){
-        return view('admin.client.edit');
-    })->name('client-edit');
-});
+    Route::get('/admin/clients/ajouter', [AdminUserController::class, 'ajouter'])->name('client-add');
+    Route::post('/admin/clients/ajouter', [AdminUserController::class, 'store'])->name('client-ajouter');
+
+    Route::get('/admin/clients/edit/{id}', [AdminUserController::class, 'edit'])->name('client.edit');
+    Route::put('/admin/clients/update/{id}', [AdminUserController::class, 'update'])->name('client.update');
+
+    Route::delete('/admin/clients/delete/{id}', [AdminUserController::class, 'delete'])->name('client.delete');
+
+    // Commandes
+    Route::get('/admin/commandes', function(){
+        return view('admin.commandes');
+    })->name('commande');
+
+    // Profil
+    Route::get('/admin/profil', function(){
+        return view('admin.profil');
+    })->name('profil');
+
+    });

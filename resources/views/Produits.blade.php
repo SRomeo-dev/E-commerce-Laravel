@@ -77,7 +77,7 @@
                 <div class="col-md-6 col-lg-2 mx-auto">
                     <div class="box">
                         <div class="img-box">
-                            <img src="{{ $produit->image }}" alt="">
+                            <img src="{{ asset('storage/' . $produit->image) }}" alt="Image du produit">
                         </div>
                         <div class="detail-box">
                             <h4>{{ $produit->nom }}</h4>

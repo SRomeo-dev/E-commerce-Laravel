@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         }
     
         // Redirection vers la page d'accueil après une connexion réussie pour les non-administrateurs
-        return redirect('/Accueil')->with('success', 'Connexion réussie ! Bienvenue.');
+        return redirect('/accueil')->with('success', 'Connexion réussie ! Bienvenue.');
     }
     
     /**

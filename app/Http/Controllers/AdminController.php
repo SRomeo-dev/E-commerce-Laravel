@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 
@@ -18,55 +19,84 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.produits', [
-            'produits' => Produit::latest()->get(),
+            'produits' => Produit::All(),
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Fonction pour afficher le formulaire d'ajou d'un produit
     public function create()
     {
-        //
+        return view('admin.produit.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+    // Fontion pour ajouter un produit
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'required|image', 
+            'nom' => 'required|string',
+            'prix' => 'required|numeric',
+            'description' => 'required|string',
+        ]);
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validatedData['image'] = $imagePath; 
+        }
+            
+        Produit::create($validatedData);
+    
+        return redirect('/admin/produits')->with('success', 'Le produit a été ajouté avec succès !');
+    }
+    
+    
+    // Fonction pour affichier le formulaire de modification
+    public function edit($id)
+    {
+        $produit = Produit ::findOrFail($id);
+        return view('admin.produit.edit', compact('produit'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Produit $produit)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Produit $produit)
+    // Fontion pour modifier un produit
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'image', 
+            'nom' => 'required|string',
+            'prix' => 'required|numeric',
+            'description' => 'required|string',
+        ]);
+    
+        $produit = Produit::findOrFail($id);
+        $produit->category_id = $validatedData['category_id'];
+        $produit->nom = $validatedData['nom'];
+        $produit->prix = $validatedData['prix'];
+        $produit->description = $validatedData['description'];
+    
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $produit->image = $imagePath;
+        }
+    
+        $produit->save();
+    
+        return redirect('/admin/produits')->with('success', 'Le produit a été modifié avec succès !');
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Produit $produit)
+    
+    // Fonction pour supprimer un produit
+    public function delete($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Produit $produit)
-    {
-        //
+        $produit = Produit ::find($id);
+    
+        if ($produit) {
+            $produit->delete();
+            return redirect('/admin/produits')->with('success', 'Le produit a bien été supprimé avec succès !');
+        } else {
+            return redirect('/admin/produits')->with('error', 'Produit non trouvé !');
+        }
     }
 }

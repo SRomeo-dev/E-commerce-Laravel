@@ -59,53 +59,32 @@ class PaiementController extends Controller
      }
      
      
-    public function success(Request $request)
-    {
-        if ($request->has('paymentIntent')) {
-            $this->store($request);
-        }
-        return "Merci pour votre commande ! Votre paiement a été traité avec succès. Le vendeur vous contactera bientôt.";
-    }
-
-    public function store(Request $request)
-    {
-        $data = $request->all();
-    
-        $commande = new Commande();
-    
-        // // Récupère l'ID de l'utilisateur connecté et l'assigne à la propriété 'user_id' de l'objet Commande
-        // $userId = Auth::id(); // Assurez-vous que votre méthode d'authentification fonctionne correctement
-        // $commande->user_id = $userId;
-    
-        // Affecte l'identifiant du paiement à la propriété 'payment_intent_id' de l'objet Commande
-        $commande->payment_intent_id = $data['paymentIntent']['id'];
-    
-        // Affecte le montant du paiement à la propriété 'amount' de l'objet Commande
-        $commande->amount = $data['paymentIntent']['amount'];
-    
-        // Convertit le timestamp du paiement en format 'Y-m-d H:i:s' et l'assigne à la propriété 'payment_created_at' de l'objet Commande
-        $paymentTimestamp = $data['paymentIntent']['created'];
-        $commande->payment_created_at = date('Y-m-d H:i:s', $paymentTimestamp);
-    
-        // Stocke les informations sur les produits dans une chaîne de caractères
-        $productsString = '';
-        $i = 0;
-    
-        foreach (Cart::content() as $produit) {
-            $productsString .= "Product " . $i . ":\n";
-            $productsString .= "Nom: " . $produit->model->nom . "\n";
-            $productsString .= "Prix: " . $produit->model->prix . "\n";
-            $productsString .= "Quantité: " . $produit->qty . "\n\n";
-            $i++;
-        }
-    
-        // Assigne la chaîne de caractères représentant les produits à la propriété 'products' de l'objet Commande
-        $commande->products = $productsString;
-        $commande->user_id =1;
-    
-        // Enregistre l'objet Commande dans la base de données
-        $commande->save();
-        Cart::destroy();
-    }
+     public function success(Request $request)
+     {
+         // Récupérez les informations de la commande après le paiement réussi
+         $cartItems = Cart::content(); // Récupération des éléments du panier
+         $totalAmount = 0; // Initialisation du montant total de la commande
+         $products = ''; // Initialisation de la liste des produits de la commande
+ 
+         foreach ($cartItems as $item) {
+             $totalAmount += $item->model->prix; // Ajouter le prix de chaque article pour obtenir le montant total
+             $products .= $item->model->nom . ', '; // Concaténer les noms des produits
+         }
+ 
+         $userName = Auth::user()->nom; // Obtenez le nom de l'utilisateur connecté
+         $userLastName = Auth::user()->prenom; // Obtenez le prénom de l'utilisateur connecté
+     
+ 
+         // Enregistrez les détails de la commande dans la base de données
+         $commande = new Commande();
+         $commande->amount = $totalAmount;
+         $commande->payment_created_at = now();
+         $commande->products = $products;
+         $commande->user_name = $userName; // Enregistrez le nom de l'utilisateur
+         $commande->user_lastname = $userLastName; // Enregistrez le prénom de l'utilisateur
+         $commande->save();
+      
+         return "Merci pour votre commande ! Votre paiement a été traité avec succès. Le vendeur vous contactera bientôt.";
+     }
         
 }

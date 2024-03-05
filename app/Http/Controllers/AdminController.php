@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Produit;
+use App\Models\Commande;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -35,23 +36,23 @@ class AdminController extends Controller
     {
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
-            'image' => 'required|image', 
+            'image' => 'required|image',
             'nom' => 'required|string',
             'prix' => 'required|numeric',
             'description' => 'required|string',
         ]);
-    
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $validatedData['image'] = $imagePath; 
         }
-            
+
         Produit::create($validatedData);
-    
+
         return redirect('/admin/produits')->with('success', 'Le produit a été ajouté avec succès !');
     }
-    
-    
+
+
     // Fonction pour affichier le formulaire de modification
     public function edit($id)
     {
@@ -65,33 +66,33 @@ class AdminController extends Controller
     {
         $validatedData = $request->validate([
             'category_id' => 'required|exists:categories,id',
-            'image' => 'image', 
+            'image' => 'image',
             'nom' => 'required|string',
             'prix' => 'required|numeric',
             'description' => 'required|string',
         ]);
-    
+
         $produit = Produit::findOrFail($id);
         $produit->category_id = $validatedData['category_id'];
         $produit->nom = $validatedData['nom'];
         $produit->prix = $validatedData['prix'];
         $produit->description = $validatedData['description'];
-    
+
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
             $produit->image = $imagePath;
         }
-    
+
         $produit->save();
-    
+
         return redirect('/admin/produits')->with('success', 'Le produit a été modifié avec succès !');
     }
-    
+
     // Fonction pour supprimer un produit
     public function delete($id)
     {
         $produit = Produit ::find($id);
-    
+
         if ($produit) {
             $produit->delete();
             return redirect('/admin/produits')->with('success', 'Le produit a bien été supprimé avec succès !');
@@ -99,4 +100,20 @@ class AdminController extends Controller
             return redirect('/admin/produits')->with('error', 'Produit non trouvé !');
         }
     }
+
+
+    // Partie dashboard
+    public function commande(){
+        return view('admin.index', [
+            'commandes' => Commande::all() // Utilisation de 'commandes' au lieu de 'commande' pour la variable dans la vue
+        ]);
+    }
+
+    // Parie Commandes
+    public function order(){
+        return view('admin.commandes', [
+            'commandes' => Commande::all() // Utilisation de 'commandes' au lieu de 'commande' pour la variable dans la vue
+        ]);
+    }
+
 }

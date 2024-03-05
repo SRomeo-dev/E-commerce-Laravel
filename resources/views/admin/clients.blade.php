@@ -101,13 +101,13 @@
                         <td>{{ $user->password }}</td>
                         <td>
                             <a href="/admin/clients/edit/{{ $user->id }}" class="btn btn-warning shadow">
-                                <i class="bi bi-pencil"></i> Modifier
+                                <i class="bi bi-pencil"></i>
                             </a>
                             <form action="/admin/clients/delete/{{ $user->id }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger shadow" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet produit ?')">
-                                    <i class="bi bi-trash"></i> Supprimer
+                                    <i class="bi bi-trash"></i>
                                 </button>
                             </form>
                         </td>

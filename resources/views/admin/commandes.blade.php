@@ -56,29 +56,35 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Numéro de Commande</th>
+                        <th>#</th>
                         <th>Date</th>
-                        <th>Client</th>
-                        <th>Total</th>
-                        <th>Statut</th>
-                        <th>Action</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Produits</th>
+                        <th>Montant</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Exemple de commande en attente -->
+                    @php
+                        $ide=1;
+                    @endphp
+                    @foreach ($commandes as $commande)
+                    
                     <tr>
-                        <td>1234</td>
-                        <td>2023-12-17</td>
-                        <td>Client XYZ</td>
-                        <td>$250.00</td>
-                        <td>En attente</td>
-                        <td>
-                            <button class="btn btn-success shadow">Valider</button>
-                            <button class="btn btn-danger shadow">Rejeter</button>
-                            <button class="btn btn-warning shadow">En attente</button>
-                        </td>
+                        <th>{{ $ide }}</th>
+                        <th>{{ $commande->payment_created_at }}</th>
+                        <td>{{ $commande->user_name }}</td>
+                        <td>{{ $commande->user_lastname }}</td>
+                        <td>{{ $commande->products }}</td>
+                        <td>{{ $commande->amount }} FCFA</td>
+                        <td><span class="badge bg-success">Approuver</span></td>
                     </tr>
-                    <!-- Autres commandes en attente peuvent être ajoutées ici -->
+                    @php
+                        $ide+=1;
+                    @endphp
+                    @endforeach
+
                 </tbody>
             </table>
         </div>
@@ -110,3 +116,39 @@
 </body>
 
 </html>
+
+            {{-- <!-- Tableau pour afficher les commandes en attente -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Produits</th>
+                        <th>Montant</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $ide=1;
+                    @endphp
+                    @foreach ($commandes as $commande)
+                    
+                    <tr>
+                        <th>{{ $ide }}</th>
+                        <th>{{ $commande->payment_created_at }}</th>
+                        <td>{{ $commande->user_name }}</td>
+                        <td>{{ $commande->user_lastname }}</td>
+                        <td>{{ $commande->products }}</td>
+                        <td>{{ $commande->amount }} FCFA</td>
+                        <td><span class="badge bg-success">Approuver</span></td>
+                    </tr>
+                    @php
+                        $ide+=1;
+                    @endphp
+                    @endforeach
+
+                </tbody>
+            </table> --}}

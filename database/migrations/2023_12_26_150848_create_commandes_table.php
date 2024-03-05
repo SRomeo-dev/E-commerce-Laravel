@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_intent_id');
+            // $table->string('payment_intent_id')->nullable();
             $table->integer('amount');
             $table->dateTime('payment_created_at');
             $table->text('products');
-            $table->unsignedBigInteger('user_id');
+            $table->string('user_name'); // Champ pour le nom de l'utilisateur
+            $table->string('user_lastname'); // Champ pour le prénom de l'utilisateur
             $table->timestamps();
         });
     }

@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/fontawesome.min.css">
 
+    <!-- Favicons -->
+    <link href="{{ asset('/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
@@ -50,7 +53,7 @@
         <script>
             var alertElement = document.querySelector('.alert');
             var closeButton = alertElement.querySelector('.btn-close');
-    
+
             closeButton.addEventListener('click', function() {
                 alertElement.classList.add('d-none');
             });
@@ -66,7 +69,7 @@
         <div class="container h-100 py-5">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
-      
+
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -84,7 +87,7 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <img src="{{ $produit->model->image }}" class="img-fluid rounded-3" style="width: 120px;" alt="Book">
+                                                <img src="{{ asset('storage/' . $produit->model->image) }}" class="img-fluid rounded-3" style="width: 120px;" alt="Book">
                                                 <div class="flex-column ms-4">
                                                     <p class="mb-2">{{ $produit->model->description }}</p>
                                                 </div>
@@ -128,11 +131,11 @@
                         </tbody>
                     </table>
                 </div>
-                       
+
                 @if (Cart::count() > 0)
                 <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
                     <div class="card-body p-4">
-                            <div class="row">                
+                            <div class="row">
                                 <div class="col-lg-4 col-xl-3">
                                     <div class="d-flex justify-content-between" style="font-weight: 500;">
                                         <p class="mb-2">Montant total</p>
@@ -166,13 +169,13 @@
         </div>
     </section>
 
-    {{-- @if (Cart::count() > 0)     
+    {{-- @if (Cart::count() > 0)
     <div class="px-4 px-lg-0">
         <div class="pb-5">
             <div class="container">
                 <div class="row">
                 <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
-        
+
                     <!-- Shopping cart table -->
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -209,7 +212,7 @@
                                         <!-- End -->
                 </div>
                 </div>
-        
+
                 <div class="row py-5 p-4 bg-white rounded shadow-sm">
                 <div class="col-lg-6">
                     <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
@@ -243,14 +246,14 @@
                     </div>
                 </div>
                 </div>
-        
+
             </div>
         </div>
     </div>
     @else
     <h2>Votre panier est vide</h2>
     @endif  --}}
-      
+
 
     <!-- jQery -->
     <script src="js/jquery-3.4.1.min.js"></script>

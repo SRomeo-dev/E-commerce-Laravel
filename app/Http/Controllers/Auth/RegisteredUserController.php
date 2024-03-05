@@ -50,6 +50,6 @@ class RegisteredUserController extends Controller
 
         $request->session();
         
-        return redirect('/Accueil')->with('success', 'Inscription réusi!');
+        return redirect('/accueil')->with('success', 'Inscription réusi!');
     }
 }

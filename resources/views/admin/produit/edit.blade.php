@@ -101,7 +101,7 @@
                     </div>
 
                     <!-- Bouton pour soumettre le formulaire -->
-                    <button type="submit" class="btn btn-warning shadow"><i class="bi bi-pencil"></i> Ajouter</button>
+                    <button type="submit" class="btn btn-warning shadow"><i class="bi bi-pencil"></i> Modifier</button>
                 </form>
             </div>
         </section>

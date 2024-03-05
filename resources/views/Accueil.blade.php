@@ -14,6 +14,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Favicons -->
+    <link href="{{ asset('/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">    
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />

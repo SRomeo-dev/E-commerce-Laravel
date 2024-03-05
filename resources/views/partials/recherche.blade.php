@@ -14,6 +14,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Favicons -->
+    <link href="{{ asset('/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -50,14 +55,14 @@
         <script>
             var alertElement = document.querySelector('.alert');
             var closeButton = alertElement.querySelector('.btn-close');
-    
+
             closeButton.addEventListener('click', function() {
                 alertElement.classList.add('d-none');
             });
         </script>
         @endif
-    
-        
+
+
         <!-- header section strats -->
         @include('partials.header')
         <!-- end header section -->
@@ -77,7 +82,7 @@
                 <div class="col-md-6 col-lg-2 mx-auto">
                     <div class="box">
                         <div class="img-box">
-                            <img src="{{ $produit->image }}" alt="">
+                            <img src="{{ asset('storage/' . $produit->image) }}"alt="">
                         </div>
                         <div class="detail-box">
                             <h4>{{ $produit->nom }}</h4>
@@ -88,7 +93,7 @@
                             <form action="{{ route('panier.add') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="produit_id" value="{{ $produit->id }}">
-    
+
                                 <button type="submit" class="btn btn-danger w-100">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
                                         <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
@@ -104,7 +109,7 @@
             </div>
         </div>
     </section>
-           
+
     <!-- jQery -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <!-- bootstrap js -->

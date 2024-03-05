@@ -196,51 +196,32 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Clients</th>
-                                                <th scope="col">Produits</th>
-                                                <th scope="col">Prix</th>
+                                                <th scope="col">Nom</th>
+                                                <th scope="col">Prénom</th>
+                                                <th scope="col">Montant</th>
                                                 <th scope="col">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $ide=1;
+                                            @endphp
+                                            @foreach ($commandes as $commande)
+                                            
                                             <tr>
-                                                <th scope="row"><a href="#">#2457</a></th>
-                                                <td>Brandon Jacob</td>
-                                                <td class="text-primary">Produits 1, prodduits2</td>
-                                                <td>$64</td>
+                                                <th scope="row">{{ $ide }}</th>
+                                                <td>{{ $commande->user_name }}</td>
+                                                <td>{{ $commande->user_lastname }}</td>
+                                                <td>{{ $commande->amount }} FCFA</td>
                                                 <td><span class="badge bg-success">Approuver</span></td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">#2147</a></th>
-                                                <td>Bridie Kessler</td>
-                                                <td class="text-primary">Produits 1, prodduits2</td>
-                                                <td>$47</td>
-                                                <td><span class="badge bg-warning">En attente</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">#2049</a></th>
-                                                <td>Ashleigh Langosh</td>
-                                                <td class="text-primary">Produits 1, prodduits2</td>
-                                                <td>$147</td>
-                                                <td><span class="badge bg-success">Approuver</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">#2644</a></th>
-                                                <td>Angus Grady</td>
-                                                <td class="text-primary">Produits 1, prodduits2</td>
-                                                <td>$67</td>
-                                                <td><span class="badge bg-danger">Rejeter</span></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row"><a href="#">#2644</a></th>
-                                                <td>Raheem Lehner</td>
-                                                <td class="text-primary">Produits 1, prodduits2</td>
-                                                <td>$165</td>
-                                                <td><span class="badge bg-success">Approuver</span></td>
-                                            </tr>
+                                            @php
+                                                $ide+=1;
+                                            @endphp
+                                            @endforeach
+                    
                                         </tbody>
                                     </table>
-
                                 </div>
 
                             </div>

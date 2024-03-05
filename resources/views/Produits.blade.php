@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/fontawesome.min.css">
 
+    <!-- Favicons -->
+    <link href="{{ asset('/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
 
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
@@ -50,14 +54,14 @@
         <script>
             var alertElement = document.querySelector('.alert');
             var closeButton = alertElement.querySelector('.btn-close');
-    
+
             closeButton.addEventListener('click', function() {
                 alertElement.classList.add('d-none');
             });
         </script>
         @endif
-    
-        
+
+
         <!-- header section strats -->
         @include('partials.header')
         <!-- end header section -->
@@ -66,10 +70,7 @@
     <!-- Section telephone -->
     <section class="expert_section layout_padding" id="Telephone">
 
-        {{-- @foreach ($produits->categories as $category)
-        @if ($produits->$category)    --}}
         <h2>Téléphone</h2>
-        {{-- @endif --}}
         <div class="container">
             <div class="row">
 
@@ -237,7 +238,7 @@
             </div>
 
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-6 col-lg-2 mx-auto">
                     <div class="box">
                         <div class="img-box">
@@ -364,9 +365,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
-        {{-- @endforeach --}}
     </section>
 
     <!-- Section Electroménager -->
@@ -633,7 +633,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Section Informatique -->
     <section class="expert_section layout_padding" id="Informatique">
         <h2>Informatique</h2>
@@ -1694,7 +1694,7 @@
             </div>
         </div>
     </section>
-   
+
 
     <!-- info section -->
     @include('partials.footer')

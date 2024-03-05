@@ -68,32 +68,32 @@ Route::middleware('auth')->group(function () {
     Route::post('/session', 'App\Http\Controllers\PaiementController@session')->name('session');
     Route::get('/success', 'App\Http\Controllers\PaiementController@success')->name('success');
     Route::post('/commandes', [PaiementController::class, 'store']);
-    
+
     //Route pour la barre de recherche
     Route::get('/recherche', [ProduitController::class, 'search'])->name('recherche');
-    
-            
-    
+
+
+
     Route::get('/produits/telephone', function(){
         return view('Produits#Telephone');
     })->name('telephone');
-    
+
     Route::get('/produits/electromenager', function(){
         return view('Produits#Electromenager');
     })->name('electromenager');
-    
+
     Route::get('/produits/informatique', function(){
         return view('Produits#Informatique');
     })->name('informatique');
-    
+
     Route::get('/produits/mode', function(){
         return view('Produits#Mode');
     })->name('mode');
-    
+
     Route::get('/produits/cosmetique', function(){
         return view('Produits#Cosmetique');
     })->name('cosmetique');
-    
+
     Route::get('/produits/electronique', function(){
         return view('Produits#Electronique');
     })->name('electronique');
@@ -102,9 +102,7 @@ Route::middleware('auth')->group(function () {
 
 // Routes accessibles uniquement à l'administrateur
 Route::middleware(['auth', Admin::class])->group(function () {
-    Route::get('/admin/dashboard', function(){
-        return view('admin.index');
-    })->name('admin');
+    Route::get('/admin/dashboard', [AdminController::class, 'commande'])->name('admin');
 
     // Produits
     Route::get('/admin/produits', [AdminController::class, 'index'])->name('produit');
@@ -132,9 +130,7 @@ Route::middleware(['auth', Admin::class])->group(function () {
     Route::delete('/admin/clients/delete/{id}', [AdminUserController::class, 'delete'])->name('client.delete');
 
     // Commandes
-    Route::get('/admin/commandes', function(){
-        return view('admin.commandes');
-    })->name('commande');
+    Route::get('/admin/commandes', [AdminController::class, 'order'])->name('commande');
 
     // Profil
     Route::get('/admin/profil', function(){
